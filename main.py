@@ -32,15 +32,10 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 
 ####################################### 2 start #######################################
 
-# Calculate the population density using area and population in cia_factbook
-# All NaN and inf needs to be removed
-
-# Take user input 7+ to display the seven highest densities, 5- to display the five lowest
-# User can also input a country name and then get the population density for that country
-
-# Display highest/lowest densities in a bar diagram
-# Or
-# Display the density of the selected country (maybe plus countries higher/lower, all in bar diagram)
+def assignment_2_plot(df_plot, main_title):
+    """ The plot function for assignment 2 """
+    print(main_title)
+    print(df_plot)
 
 def assignment_2(_df_cia_factbook):
     """ My solution to assignment 2. The function is called just below """
@@ -75,32 +70,43 @@ def assignment_2(_df_cia_factbook):
     print('')
 
     # user_input = str(input('Input:'))
-    user_input = "Svalbard"
+    user_input = "Norway"
 
-    if user_input[-1] == '+':
-        stop_index = int(user_input[:-1])
-        df_high = fb_sorted[0:stop_index]
+    # sort the user input based on what type it is
+    if user_input[-1] == '+':               # Last character is "+"
+        stop_index = int(user_input[:-1])   # Extract all numbers before "+"
+        df_high = fb_sorted[0:stop_index]   # Create a dataframe from the index
         
-        print(df_high)
+        # Create a title for the plot and send to plot function
+        main_title = f"The {stop_index} countries with highest population density"
+        assignment_2_plot(df_high, main_title)
 
+    # Basically the same as before
     elif user_input[-1] == '-':
         start_index = int(user_input[:-1])
         df_low = fb_sorted[-start_index:]
 
-        print(df_low)
+        main_title = f"The {start_index} countries with lowest population density"
+        assignment_2_plot(df_low, main_title)
 
+    # Check if user input match any of the countries
+    # (I think this breaks down if the user input is for example 'a')
     elif fb_sorted['country'].str.contains(user_input).any():
+        # I do a fancy thing here, 
+        # I collect the 6 closest countries i a dataframe instead of just printing it
         row_index = fb_sorted.loc[fb_sorted['country'] == user_input].index[0]
 
         row_index = 4 if row_index < 4 else row_index
         row_index = fb_sorted.shape[0]-3 if row_index > fb_sorted.shape[0]-3 else row_index
 
         df_country = fb_sorted.iloc[row_index-4 : row_index+3]
-        print(df_country)
+
+        # Send the fancy dataframe and title to plotting function
+        main_title = f"The population density of {user_input} and the 6 closest countries"
+        assignment_2_plot(df_country, main_title)
+
     else:
         print('no...')
-
-    # print(fb_sorted)
 
 
 
