@@ -42,20 +42,26 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 # Or
 # Display the density of the selected country (maybe plus countries higher/lower, all in bar diagram)
 
-def assignment_2(df_cia_factbook):
+def assignment_2(_df_cia_factbook):
     """ My solution to assignment 2. The function is called just below """
 
     # Create the pandas series density and add it to df_cia_factbook dataframe
-    density = df_cia_factbook['population'] / df_cia_factbook['area']
-    df_cia_factbook['density'] = density
+    density = _df_cia_factbook['population'] / _df_cia_factbook['area']
+    _df_cia_factbook['density'] = density
 
+    # I save the original index before dropna and sorting for a fancy plot later on
+    original_index = _df_cia_factbook.index
+    
     # This changes the inf for Vatican City to NaN. This enables dropna for Vatican City and
     # all other countries with NaN density
-    df_cia_factbook = df_cia_factbook.replace({np.inf:np.nan})
-    df_cia_factbook = df_cia_factbook.dropna(subset=['density'])
+    _df_cia_factbook = _df_cia_factbook.replace({np.inf:np.nan})
+    _df_cia_factbook = _df_cia_factbook.dropna(subset=['density'])
 
     # Sort the dataframe and put the highest density first
-    fb_sorted = df_cia_factbook.sort_values(by='density', ascending=False)
+    fb_sorted = _df_cia_factbook.sort_values(by='density', ascending=False)
+    
+    # Add a sorted index to enable fancy plot later on
+    fb_sorted = fb_sorted.set_index(original_index[0:fb_sorted.shape[0]])
 
     print('')
     print('############################## Assignment 2 ##############################')
@@ -69,7 +75,7 @@ def assignment_2(df_cia_factbook):
     print('')
 
     # user_input = str(input('Input:'))
-    user_input = "6-"
+    user_input = "Svalbard"
 
     if user_input[-1] == '+':
         stop_index = int(user_input[:-1])
@@ -84,7 +90,13 @@ def assignment_2(df_cia_factbook):
         print(df_low)
 
     elif fb_sorted['country'].str.contains(user_input).any():
-        print(user_input + 'C!!!')
+        row_index = fb_sorted.loc[fb_sorted['country'] == user_input].index[0]
+
+        row_index = 4 if row_index < 4 else row_index
+        row_index = fb_sorted.shape[0]-3 if row_index > fb_sorted.shape[0]-3 else row_index
+
+        df_country = fb_sorted.iloc[row_index-4 : row_index+3]
+        print(df_country)
     else:
         print('no...')
 
