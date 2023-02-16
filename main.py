@@ -42,19 +42,22 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 # Or
 # Display the density of the selected country (maybe plus countries higher/lower, all in bar diagram)
 
-def assignment_2(fact_book):
+def assignment_2(df_cia_factbook):
     """ My solution to assignment 2. The function is called just below """
 
-    # Create the pandas series density and add it to fact_book dataframe
-    density = fact_book['population'] / fact_book['area']
-    fact_book['density'] = density
+    # Create the pandas series density and add it to df_cia_factbook dataframe
+    density = df_cia_factbook['population'] / df_cia_factbook['area']
+    df_cia_factbook['density'] = density
 
     # This changes the inf for Vatican City to NaN. This enables dropna for Vatican City and
     # all other countries with NaN density
-    fact_book = fact_book.replace({np.inf:np.nan})
-    fact_book = fact_book.dropna(subset=['density'])
+    df_cia_factbook = df_cia_factbook.replace({np.inf:np.nan})
+    df_cia_factbook = df_cia_factbook.dropna(subset=['density'])
+    
+    # Sort the dataframe and put the highest density first
+    fb_sorted = df_cia_factbook.sort_values(by='density', ascending=False)
 
-    print(fact_book)
+    print(fb_sorted)
 
 
 
