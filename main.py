@@ -1,4 +1,4 @@
-"Example 1"
+"I separate all assignments into functions."
 
 import pandas as pd
 
@@ -26,9 +26,18 @@ def assignment_1():
     return fact_book, world_cities, world_pub_ind
 
 
+# The dataframe objects are stored with their correct names
 df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 
-##################################### 1 finished #####################################
 
-print(df_worldpubind)
+####################################### 2 start #######################################
 
+# Calculate the population density using area and population in cia_factbook
+# All NaN and inf needs to be removed
+
+# Take user input 7+ to display the seven highest densities, 5- to display the five lowest
+# User can also input a country name and then get the population density for that country
+
+# Display highest/lowest densities in a bar diagram
+# Or 
+# Display the density of the selected country (maybe plus countries higher/lower, all in bar diagram) 
