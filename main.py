@@ -1,13 +1,12 @@
-"I separate all assignments into functions."
+""" 
+I separate all assignments into functions.
+"""
 
 import pandas as pd
 
 ####################################### 1 start #######################################
 def assignment_1():
-    """ 
-    Uppgift 1 
-    Load all data and clean it up, then return all three as Dataframe objects 
-    """
+    """ Load all data and clean it up, then return all three as Dataframe objects """
 
     # I set index_col='Index' to avoid an unnecessary index row
     # The drop unnamed: 0 is done to avoid a second unnecessary index row
@@ -39,5 +38,12 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 # User can also input a country name and then get the population density for that country
 
 # Display highest/lowest densities in a bar diagram
-# Or 
-# Display the density of the selected country (maybe plus countries higher/lower, all in bar diagram) 
+# Or
+# Display the density of the selected country (maybe plus countries higher/lower, all in bar diagram)
+
+def assignment_2(fact_book):
+    """ My solution to assignment 2. The function is called just below """
+    print(fact_book)
+
+
+assignment_2(df_cia_factbook)
