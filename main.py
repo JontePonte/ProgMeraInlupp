@@ -68,13 +68,21 @@ def assignment_2(df_cia_factbook):
     print('     You can also input a countries name to view its density')
     print('')
 
-    user_input = str(input('Input:'))
-    # user_input = "6+"
+    # user_input = str(input('Input:'))
+    user_input = "6-"
 
     if user_input[-1] == '+':
-        print(user_input + ' +++')
+        stop_index = int(user_input[:-1])
+        df_high = fb_sorted[0:stop_index]
+        
+        print(df_high)
+
     elif user_input[-1] == '-':
-        print(user_input + ' ---')
+        start_index = int(user_input[:-1])
+        df_low = fb_sorted[-start_index:]
+
+        print(df_low)
+
     elif fb_sorted['country'].str.contains(user_input).any():
         print(user_input + 'C!!!')
     else:
