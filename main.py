@@ -53,13 +53,34 @@ def assignment_2(df_cia_factbook):
     # all other countries with NaN density
     df_cia_factbook = df_cia_factbook.replace({np.inf:np.nan})
     df_cia_factbook = df_cia_factbook.dropna(subset=['density'])
-    
+
     # Sort the dataframe and put the highest density first
     fb_sorted = df_cia_factbook.sort_values(by='density', ascending=False)
 
-    input_first = input('How many countries would you like to display? (write a name of a country to display that)')
+    print('')
+    print('############################## Assignment 2 ##############################')
+    print('')
+    print('     List the countries with highest and lowest population density ')
+    print('')
+    print('     Input "7+" to display the 7 countries with highest densities')
+    print('     Input "5-" to display the 5 countries with lowest densities')
+    print('')
+    print('     You can also input a countries name to view its density')
+    print('')
 
-    print(fb_sorted)
+    user_input = str(input('Input:'))
+    # user_input = "6+"
+
+    if user_input[-1] == '+':
+        print(user_input + ' +++')
+    elif user_input[-1] == '-':
+        print(user_input + ' ---')
+    elif fb_sorted['country'].str.contains(user_input).any():
+        print(user_input + 'C!!!')
+    else:
+        print('no...')
+
+    # print(fb_sorted)
 
 
 
