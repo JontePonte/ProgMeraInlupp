@@ -4,6 +4,7 @@ I separate all assignments into functions.
 
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 
 ####################################### 1 start #######################################
 def assignment_1():
@@ -32,10 +33,17 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 
 ####################################### 2 start #######################################
 
-def assignment_2_plot(df_plot, main_title):
+def assignment_2_plot(df_output, main_title):
     """ The plot function for assignment 2 """
-    print(main_title)
-    print(df_plot)
+    # Plot the country and density as a bar diagram without legend
+    df_output.plot(x='country', y='density', kind='bar', legend=False)
+
+    # Set all labels and print the diagram
+    plt.xlabel('Country')
+    plt.ylabel('[People/km^2]')
+    plt.title(main_title)
+    plt.show()
+
 
 def assignment_2(_df_cia_factbook):
     """ My solution to assignment 2. The function is called just below """
@@ -69,8 +77,7 @@ def assignment_2(_df_cia_factbook):
     print('     You can also input a countries name to view its density')
     print('')
 
-    # user_input = str(input('Input:'))
-    user_input = "Norway"
+    user_input = str(input('Input:'))
 
     # sort the user input based on what type it is
     if user_input[-1] == '+':               # Last character is "+"
@@ -106,7 +113,7 @@ def assignment_2(_df_cia_factbook):
         assignment_2_plot(df_country, main_title)
 
     else:
-        print('no...')
+        print('The input was incorrect, please provide a new input')
 
 
 
