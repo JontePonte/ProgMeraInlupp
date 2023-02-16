@@ -57,6 +57,8 @@ def assignment_2(df_cia_factbook):
     # Sort the dataframe and put the highest density first
     fb_sorted = df_cia_factbook.sort_values(by='density', ascending=False)
 
+    input_first = input('How many countries would you like to display? (write a name of a country to display that)')
+
     print(fb_sorted)
 
 
