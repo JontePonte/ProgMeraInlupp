@@ -3,6 +3,7 @@ I separate all assignments into functions.
 """
 
 import pandas as pd
+import numpy as np
 
 ####################################### 1 start #######################################
 def assignment_1():
@@ -43,7 +44,18 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
 
 def assignment_2(fact_book):
     """ My solution to assignment 2. The function is called just below """
+
+    # Create the pandas series density and add it to fact_book dataframe
+    density = fact_book['population'] / fact_book['area']
+    fact_book['density'] = density
+
+    # This changes the inf for Vatican City to NaN. This enables dropna for Vatican City and
+    # all other countries with NaN density
+    fact_book = fact_book.replace({np.inf:np.nan})
+    fact_book = fact_book.dropna(subset=['density'])
+
     print(fact_book)
+
 
 
 assignment_2(df_cia_factbook)
