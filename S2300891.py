@@ -132,8 +132,20 @@ def assignment_2(_df_cia_factbook):
 
 def assignment_3_choice_1(_df_cia_factbook):
     """ Solution for choice 1 """
-    print('Choice 1')
-    print(_df_cia_factbook.index)
+    df_cleaned = _df_cia_factbook.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
+
+    test =  \
+            (df_cleaned['population'] > df_cleaned['population'].mean()) & \
+            (df_cleaned['area'] < df_cleaned['area'].mean()) & \
+            (df_cleaned['birth_rate'] >= 15) & \
+            (df_cleaned['birth_rate'] <= 24) & \
+            (df_cleaned['life_exp_at_birth'] > 70)
+
+    df_filtered = df_cleaned[test]
+    df_result = df_filtered.loc[:,['country', 'population', 'area', 'life_exp_at_birth', 'birth_rate']]
+    df_result = df_result.set_index('country')
+
+    print(df_result)
 
 def assignment_3_choice_2(_df_cia_factbook):
     """ Solution for choice 2 """
@@ -166,12 +178,13 @@ def assignment_3(_df_cia_factbook):
     """ My solution to assignment 3 """
     # Call the print menu function
     assignment_3_print_menu()
-    
+
     # is_running controls the while loop
     is_running = True
     while is_running:
         # User menu input is stored in "choice"
         choice = input('     Choose a menu option (0 for info): ')
+        # choice = '2'
         print('')
         print('')
 
@@ -200,6 +213,8 @@ def assignment_3(_df_cia_factbook):
         print('')
         print('')
         print('')
+
+        # is_running = False
 
 
 
