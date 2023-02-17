@@ -158,13 +158,37 @@ def assignment_3_print_menu():
     print('     growth (or decline) per 1000 inhabitants')
     print('')
     print('     Press 4 to exit program')
-    print('     press 5 to view menu again')
+    print('     press 0 to view menu again')
     print('')
 
 
 def assignment_3(_df_cia_factbook):
     """ My solution to assignment 3 """
+    is_running = True
     assignment_3_print_menu()
+    while is_running:
+        choice = input('     Choose a menu option: ')
+        
+        if choice == '1':
+            assignment_3_choice_1(_df_cia_factbook)
+            input('press enter to return')
+        elif choice == '2':
+            assignment_3_choice_2(_df_cia_factbook)
+            input('press enter to return')
+        elif choice == '3':
+            assignment_3_choice_3(_df_cia_factbook)
+            input('press enter to return')
+        elif choice == '4':
+            print('Program stop')
+            is_running = False
+        elif choice == '0':
+            assignment_3_print_menu()
+        else:
+            print('     Incorrect input, please try again')
+        
+
+
+
 
 
 ##################### This is where the assignments are called ########################
