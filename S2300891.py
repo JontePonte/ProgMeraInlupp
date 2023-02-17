@@ -144,16 +144,27 @@ def assignment_3_choice_1(_df_cia_factbook):
 
     # This step is unnecessary because none of the countries that fulfill the criteria contains any NaN
     # I don't think they can have any NaN but I include the line anyway because of the instructions
-    df_cleaned = df_filtered.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
+    df_result = df_filtered.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
 
-    # Pick the relevant columns and print the result
-    df_result = df_cleaned.loc[:,['country', 'population', 'area', 'life_exp_at_birth', 'birth_rate']]
-    df_result = df_result.set_index('country')
-
+    # I tried to match the example output
     print('     Geographically small, high population countries with high birth ')
     print('     rate and high life expectancy:')
     print('')
-    print(df_result)
+    print('     Country:              Area:              Number of Births:        Life Expectancy:')
+    print('                           [km^2]             [per 1000 inhabitants]')
+    print('------------------------------------------------------------------------------------------')
+
+    # Loop over all filtered rows (countries)
+    for _, row in df_result.iterrows():
+        # I set a desired length of the strings and add padding (spaces)
+        padding_country = max(22 - len(row['country']), 0)
+        padding_area = max(22 - len(str(row['area'])), 0)
+        print(\
+                " "*5 +\
+                row['country'] + " "*padding_country +\
+                str(row['area']) + " "*padding_area +\
+                str(row['birth_rate']) + " "*20 +\
+                str(row['life_exp_at_birth']))
     print('')
 
 def assignment_3_choice_2(_df_cia_factbook):
@@ -200,13 +211,13 @@ def assignment_3(_df_cia_factbook):
         # Call the functions based on the user input
         if choice == '1':
             assignment_3_choice_1(_df_cia_factbook)
-            input('press any key')
+            input('press enter')
         elif choice == '2':
             assignment_3_choice_2(_df_cia_factbook)
-            input('press any key')
+            input('press enter')
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
-            input('press any key')
+            input('press enter')
         # choice 4 stops the program
         elif choice == '4':
             print('Program stop')
