@@ -130,7 +130,23 @@ def assignment_2(_df_cia_factbook):
 
 ####################################### 3 start #######################################
 
+def assignment_3_choice_1(_df_cia_factbook):
+    """ Solution for choice 1 """
+    print('Choice 1')
+    print(_df_cia_factbook.index)
+
+def assignment_3_choice_2(_df_cia_factbook):
+    """ Solution for choice 2 """
+    print('Choice 3')
+    print(_df_cia_factbook.index)
+
+def assignment_3_choice_3(_df_cia_factbook):
+    """ Solution for choice 3 """
+    print('Choice 3')
+    print(_df_cia_factbook.index)
+
 def assignment_3_print_menu():
+    """ Print out the menu text"""
     print('')
     print('############################## Assignment 2 ##############################')
     print('')
