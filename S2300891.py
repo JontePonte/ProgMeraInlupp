@@ -137,7 +137,7 @@ def assignment_3_choice_1(_df_cia_factbook):
 
 def assignment_3_choice_2(_df_cia_factbook):
     """ Solution for choice 2 """
-    print('Choice 3')
+    print('Choice 2')
     print(_df_cia_factbook.index)
 
 def assignment_3_choice_3(_df_cia_factbook):
@@ -164,20 +164,27 @@ def assignment_3_print_menu():
 
 def assignment_3(_df_cia_factbook):
     """ My solution to assignment 3 """
-    is_running = True
+    # Call the print menu function
     assignment_3_print_menu()
+    
+    # is_running controls the while loop
+    is_running = True
     while is_running:
-        choice = input('     Choose a menu option: ')
-        
+        # User menu input is stored in "choice"
+        choice = input('     Choose a menu option (0 for info): ')
+        print('')
+        print('')
+
+        # Call the functions based on the user input
         if choice == '1':
             assignment_3_choice_1(_df_cia_factbook)
-            input('press enter to return')
+            input('press any key')
         elif choice == '2':
             assignment_3_choice_2(_df_cia_factbook)
-            input('press enter to return')
+            input('press any key')
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
-            input('press enter to return')
+            input('press any key')
         elif choice == '4':
             print('Program stop')
             is_running = False
@@ -185,7 +192,12 @@ def assignment_3(_df_cia_factbook):
             assignment_3_print_menu()
         else:
             print('     Incorrect input, please try again')
-        
+
+        # Add extra rows to separate outputs
+        print('')
+        print('')
+        print('')
+
 
 
 
