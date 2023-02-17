@@ -170,21 +170,31 @@ def assignment_3_choice_1(_df_cia_factbook):
 
 def assignment_3_choice_2(_df_cia_factbook):
     """ Solution for choice 2 """
+    # I decided to create the extra column in multiple steps to make it easier to read
     internet_quotient = _df_cia_factbook['internet_users'] / _df_cia_factbook['population']
     internet_density = internet_quotient * 100000
     _df_cia_factbook['internet_density'] = internet_density
 
+    # Remove all NaN in the dataset
     df_cleaned = _df_cia_factbook.dropna(subset=['internet_density'])
+    # Sort the dataset from lowest to highest internet density
     df_sorted = df_cleaned.sort_values(by='internet_density')
 
+    # Create a dataframe containing the 5 lowest internet density countries
     df_lowest = df_sorted[:5]
 
+    # The dataframe containing the 5 highest internet density countries is resorted from high to low
     df_highest = df_sorted[-5:]
     df_highest = df_highest.sort_values(by='internet_density', ascending=False)
 
+    # I tried to match the example output but needed more space (literary)
+    # This because Congo has such a ridiculously long name...
     print('     Country:                           Population:           Internet users:          ')
     print('                                                              [per 100000 inhabitants] ')
     print('---------------------------------------------------------------------------------------')
+
+    # Country name, population and internet user per 100000 people are printed
+    # Same as choice 1, I add padding to get all rows lined up
     print('Lowest:')
     for _,row in df_lowest.iterrows():
         padding_country = max(35 - len(row['country']), 0)
@@ -193,7 +203,7 @@ def assignment_3_choice_2(_df_cia_factbook):
                 " "*5 +\
                 row['country'] + " "*padding_country +\
                 f"{int(row['population'])}" + " "*padding_population +\
-                f"{row['internet_density']:.2f}")
+                f"{row['internet_density']:.2f}") # This could probably be done prettier...
     print('Highest:')
     for _,row in df_highest.iterrows():
         padding_country = max(35 - len(row['country']), 0)
