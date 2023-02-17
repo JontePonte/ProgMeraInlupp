@@ -185,11 +185,14 @@ def assignment_3(_df_cia_factbook):
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
             input('press any key')
+        # choice 4 stops the program
         elif choice == '4':
             print('Program stop')
             is_running = False
+        # 0 reprints the menu options
         elif choice == '0':
             assignment_3_print_menu()
+        # A simple else to handle incorrect user input
         else:
             print('     Incorrect input, please try again')
 
@@ -197,9 +200,6 @@ def assignment_3(_df_cia_factbook):
         print('')
         print('')
         print('')
-
-
-
 
 
 
