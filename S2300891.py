@@ -28,11 +28,6 @@ def assignment_1():
     return fact_book, world_cities, world_pub_ind
 
 
-# The dataframe objects are stored with their correct names
-df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
-
-
-
 ####################################### 2 start #######################################
 
 def assignment_2_plot(df_output, main_title):
@@ -51,7 +46,7 @@ def assignment_2(_df_cia_factbook):
     """ 
     My solution to assignment 2. The function is called at the bottom of this file.
     I allowed more than 10 countries to be plotted. I can change it if you like
-    but I think it's interesting to see many of them at once.
+    but I think it's nice to also be able to see many of them at once.
     """
 
     # Create the pandas series density and add it to df_cia_factbook dataframe
@@ -60,7 +55,7 @@ def assignment_2(_df_cia_factbook):
 
     # I save the original index before dropna and sorting for a fancy plot later on
     original_index = _df_cia_factbook.index
-    
+
     # This changes the inf for Vatican City to NaN. This enables dropna for Vatican City and
     # all other countries with NaN density
     _df_cia_factbook = _df_cia_factbook.replace({np.inf:np.nan})
@@ -68,7 +63,7 @@ def assignment_2(_df_cia_factbook):
 
     # Sort the dataframe and put the highest density first
     fb_sorted = _df_cia_factbook.sort_values(by='density', ascending=False)
-    
+
     # Add a sorted index to enable fancy plot later on
     fb_sorted = fb_sorted.set_index(original_index[0:fb_sorted.shape[0]])
 
@@ -93,7 +88,7 @@ def assignment_2(_df_cia_factbook):
         if user_input[-1] == '+':               # Last character is "+"
             stop_index = int(user_input[:-1])   # Extract all numbers before "+"
             df_high = fb_sorted[0:stop_index]   # Create a dataframe from the index
-            
+
             # Create a title for the plot and send to plot function
             main_title = f"The {stop_index} countries with highest population density"
             assignment_2_plot(df_high, main_title)
@@ -133,7 +128,17 @@ def assignment_2(_df_cia_factbook):
 
 ####################################### 3 start #######################################
 
+def assignment_3(_df_cia_factbook):
+    """ My solution to assignment 3 """
+    print(_df_cia_factbook)
+
 
 ##################### This is where the assignments are called ########################
 
-assignment_2(df_cia_factbook)
+
+# The dataframe objects are stored with their correct names
+# This needs to be done to enable all other assignments to be called
+df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
+
+# assignment_2(df_cia_factbook)
+assignment_3(df_cia_factbook)
