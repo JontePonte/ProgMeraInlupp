@@ -1,5 +1,5 @@
 """ 
-I separate all assignments into functions. They can be called at the bottom of this file.
+I separated the assignments into functions. They are called at the bottom of this file.
 """
 
 import pandas as pd
@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 
 
 ####################################### 1 start #######################################
+
 def assignment_1():
     """ Load all data and clean it up, then return all three as Dataframe objects """
 
@@ -26,6 +27,7 @@ def assignment_1():
     world_pub_ind = world_pub_ind.drop(columns=["Indicator Name", "Indicator Code"])
 
     return fact_book, world_cities, world_pub_ind
+
 
 
 ####################################### 2 start #######################################
@@ -133,12 +135,13 @@ def assignment_3(_df_cia_factbook):
     print(_df_cia_factbook)
 
 
-##################### This is where the assignments are called ########################
 
+##################### This is where the assignments are called ########################
 
 # The dataframe objects are stored with their correct names
 # This needs to be done to enable all other assignments to be called
 df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
+
 
 # assignment_2(df_cia_factbook)
 assignment_3(df_cia_factbook)
