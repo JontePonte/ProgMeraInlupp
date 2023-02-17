@@ -132,11 +132,9 @@ def assignment_2(_df_cia_factbook):
 
 def assignment_3_choice_1(_df_cia_factbook):
     """ Solution for choice 1 """
-    df_cleaned = _df_cia_factbook.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
-
     test =  \
-            (_df_cia_factbook['population'] > df_cleaned['population'].mean()) & \
-            (_df_cia_factbook['area'] < df_cleaned['area'].mean()) & \
+            (_df_cia_factbook['population'] > _df_cia_factbook['population'].mean()) & \
+            (_df_cia_factbook['area'] < _df_cia_factbook['area'].mean()) & \
             (_df_cia_factbook['birth_rate'] >= 15) & \
             (_df_cia_factbook['birth_rate'] <= 24) & \
             (_df_cia_factbook['life_exp_at_birth'] > 70)
@@ -215,7 +213,6 @@ def assignment_3(_df_cia_factbook):
             print('     Incorrect input, please try again')
 
         # Add extra rows to separate outputs
-        print('')
         print('')
         print('')
 
