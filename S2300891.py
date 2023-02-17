@@ -84,7 +84,7 @@ def assignment_2(_df_cia_factbook):
     is_input_bad = True
     while is_input_bad:
         is_input_bad = False                    # input is not bad until proven otherwise
-        user_input = str(input('Input:'))
+        user_input = str(input('     Input:'))
 
         # sort the user input based on what type it is
         if user_input[-1] == '+':               # Last character is "+"
@@ -130,10 +130,25 @@ def assignment_2(_df_cia_factbook):
 
 ####################################### 3 start #######################################
 
+def assignment_3_print_menu():
+    print('')
+    print('############################## Assignment 2 ##############################')
+    print('')
+    print('     Press 1 to view small high population countries with high birth rate')
+    print('     and high life expectancy')
+    print('     Press 2 to view the countries with lowest and highest internet user')
+    print('     density')
+    print('     Press 3 to view the countries with highest and lowest population')
+    print('     growth (or decline) per 1000 inhabitants')
+    print('')
+    print('     Press 4 to exit program')
+    print('     press 5 to view menu again')
+    print('')
+
+
 def assignment_3(_df_cia_factbook):
     """ My solution to assignment 3 """
-    print(_df_cia_factbook)
-
+    assignment_3_print_menu()
 
 
 ##################### This is where the assignments are called ########################
