@@ -132,6 +132,7 @@ def assignment_2(_df_cia_factbook):
 
 def assignment_3_choice_1(_df_cia_factbook):
     """ Solution for choice 1 """
+    # The test creates a bool-mask based on the assignment criteria
     test =  \
             (_df_cia_factbook['population'] > _df_cia_factbook['population'].mean()) & \
             (_df_cia_factbook['area'] < _df_cia_factbook['area'].mean()) & \
@@ -139,9 +140,13 @@ def assignment_3_choice_1(_df_cia_factbook):
             (_df_cia_factbook['birth_rate'] <= 24) & \
             (_df_cia_factbook['life_exp_at_birth'] > 70)
 
-    df_filtered = _df_cia_factbook[test]
+    df_filtered = _df_cia_factbook[test] # df_filtered is a dataframe with the filtered countries
+
+    # This step is unnecessary because none of the countries that fulfill the criteria contains any NaN
+    # I don't think they can have any NaN but I include the line anyway because of the instructions
     df_cleaned = df_filtered.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
 
+    # Pick the relevant columns and print the result
     df_result = df_cleaned.loc[:,['country', 'population', 'area', 'life_exp_at_birth', 'birth_rate']]
     df_result = df_result.set_index('country')
 
@@ -149,6 +154,7 @@ def assignment_3_choice_1(_df_cia_factbook):
     print('     rate and high life expectancy:')
     print('')
     print(df_result)
+    print('')
 
 def assignment_3_choice_2(_df_cia_factbook):
     """ Solution for choice 2 """
