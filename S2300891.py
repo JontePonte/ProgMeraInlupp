@@ -142,7 +142,7 @@ def assignment_3_choice_1(_df_cia_factbook):
 
     df_filtered = _df_cia_factbook[test] # df_filtered is a dataframe with the filtered countries
 
-    # This step is unnecessary because none of the countries that fulfill the criteria contains any NaN
+    # This step is unnecessary because no country that fulfill the criteria contain NaN
     # I don't think they can have any NaN but I include the line anyway because of the instructions
     df_result = df_filtered.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
 
@@ -152,7 +152,7 @@ def assignment_3_choice_1(_df_cia_factbook):
     print('')
     print('     Country:              Area:              Number of Births:        Life Expectancy:')
     print('                           [km^2]             [per 1000 inhabitants]')
-    print('------------------------------------------------------------------------------------------')
+    print('-----------------------------------------------------------------------------------------')
 
     # Loop over all filtered rows (countries)
     for _, row in df_result.iterrows():
@@ -167,10 +167,44 @@ def assignment_3_choice_1(_df_cia_factbook):
                 str(row['life_exp_at_birth']))
     print('')
 
+
 def assignment_3_choice_2(_df_cia_factbook):
     """ Solution for choice 2 """
-    print('Choice 2')
-    print(_df_cia_factbook.index)
+    internet_quotient = _df_cia_factbook['internet_users'] / _df_cia_factbook['population']
+    internet_density = internet_quotient * 100000
+    _df_cia_factbook['internet_density'] = internet_density
+
+    df_cleaned = _df_cia_factbook.dropna(subset=['internet_density'])
+    df_sorted = df_cleaned.sort_values(by='internet_density')
+
+    df_lowest = df_sorted[:5]
+
+    df_highest = df_sorted[-5:]
+    df_highest = df_highest.sort_values(by='internet_density', ascending=False)
+
+    print('     Country:                           Population:           Internet users:          ')
+    print('                                                              [per 100000 inhabitants] ')
+    print('---------------------------------------------------------------------------------------')
+    print('Lowest:')
+    for _,row in df_lowest.iterrows():
+        padding_country = max(35 - len(row['country']), 0)
+        padding_population = max(22 - len(str(row['population'])), 0)
+        print(\
+                " "*5 +\
+                row['country'] + " "*padding_country +\
+                f"{int(row['population'])}" + " "*padding_population +\
+                f"{row['internet_density']:.2f}")
+    print('Highest:')
+    for _,row in df_highest.iterrows():
+        padding_country = max(35 - len(row['country']), 0)
+        padding_population = max(22 - len(str(row['population'])), 0)
+        print(\
+                " "*5 +\
+                row['country'] + " "*padding_country +\
+                f"{int(row['population'])}" + " "*padding_population +\
+                f"{row['internet_density']:.2f}")
+    print('')
+
 
 def assignment_3_choice_3(_df_cia_factbook):
     """ Solution for choice 3 """
@@ -203,8 +237,8 @@ def assignment_3(_df_cia_factbook):
     is_running = True
     while is_running:
         # User menu input is stored in "choice"
-        choice = input('     Choose a menu option (0 for info): ')
-        # choice = '2'
+        # choice = input('     Choose a menu option (0 for info): ')
+        choice = '2'
         print('')
         print('')
 
@@ -214,7 +248,7 @@ def assignment_3(_df_cia_factbook):
             input('press enter')
         elif choice == '2':
             assignment_3_choice_2(_df_cia_factbook)
-            input('press enter')
+            # input('press enter')
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
             input('press enter')
@@ -233,7 +267,7 @@ def assignment_3(_df_cia_factbook):
         print('')
         print('')
 
-        # is_running = False
+        is_running = False
 
 
 
