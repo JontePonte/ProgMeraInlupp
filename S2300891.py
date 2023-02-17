@@ -119,7 +119,8 @@ def assignment_2(_df_cia_factbook):
             df_country = fb_sorted.iloc[row_index-4 : row_index+3]
 
             # Send the fancy dataframe and title to plotting function
-            main_title = f"The population density of {user_input} and the 6 closest countries"
+            # fb_sorted.iloc[row_index]['density']:.1f extracts population density with one decima
+            main_title = f"The population density of {user_input} is {fb_sorted.iloc[row_index]['density']:.1f} people per km^2"
             assignment_2_plot(df_country, main_title)
 
         else:
