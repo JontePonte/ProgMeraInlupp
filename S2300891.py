@@ -135,14 +135,16 @@ def assignment_3_choice_1(_df_cia_factbook):
     df_cleaned = _df_cia_factbook.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
 
     test =  \
-            (df_cleaned['population'] > df_cleaned['population'].mean()) & \
-            (df_cleaned['area'] < df_cleaned['area'].mean()) & \
-            (df_cleaned['birth_rate'] >= 15) & \
-            (df_cleaned['birth_rate'] <= 24) & \
-            (df_cleaned['life_exp_at_birth'] > 70)
+            (_df_cia_factbook['population'] > df_cleaned['population'].mean()) & \
+            (_df_cia_factbook['area'] < df_cleaned['area'].mean()) & \
+            (_df_cia_factbook['birth_rate'] >= 15) & \
+            (_df_cia_factbook['birth_rate'] <= 24) & \
+            (_df_cia_factbook['life_exp_at_birth'] > 70)
 
-    df_filtered = df_cleaned[test]
-    df_result = df_filtered.loc[:,['country', 'population', 'area', 'life_exp_at_birth', 'birth_rate']]
+    df_filtered = _df_cia_factbook[test]
+    df_cleaned = df_filtered.dropna(subset=['population', 'area', 'life_exp_at_birth', 'birth_rate'])
+
+    df_result = df_cleaned.loc[:,['country', 'population', 'area', 'life_exp_at_birth', 'birth_rate']]
     df_result = df_result.set_index('country')
 
     print('     Geographically small, high population countries with high birth ')
