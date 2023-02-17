@@ -145,6 +145,9 @@ def assignment_3_choice_1(_df_cia_factbook):
     df_result = df_filtered.loc[:,['country', 'population', 'area', 'life_exp_at_birth', 'birth_rate']]
     df_result = df_result.set_index('country')
 
+    print('     Geographically small, high population countries with high birth ')
+    print('     rate and high life expectancy:')
+    print('')
     print(df_result)
 
 def assignment_3_choice_2(_df_cia_factbook):
@@ -162,8 +165,8 @@ def assignment_3_print_menu():
     print('')
     print('############################## Assignment 2 ##############################')
     print('')
-    print('     Press 1 to view small high population countries with high birth rate')
-    print('     and high life expectancy')
+    print('     Press 1 to view geographically small, high population countries with high birth ')
+    print('     rate and high life expectancy')
     print('     Press 2 to view the countries with lowest and highest internet user')
     print('     density')
     print('     Press 3 to view the countries with highest and lowest population')
