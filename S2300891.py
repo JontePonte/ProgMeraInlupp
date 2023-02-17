@@ -283,9 +283,9 @@ def assignment_3(_df_cia_factbook):
 
 ##################### This is where the assignments are called ########################
 
-# The dataframe objects are stored with their correct names
-# This needs to be done to enable all other assignments to be called
-df_cia_factbook, df_worldcities, df_worldpubind = assignment_1()
+# The data in the csv-files are stored in dataframe objects with correct names
+# This needs to be done to enable the other assignments
+df_cia_factbook, df_worldcities, df_worldpubind = assignment_1() # assignment_1 returns the data
 
 
 # assignment_2(df_cia_factbook)
