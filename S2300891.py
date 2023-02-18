@@ -1,6 +1,7 @@
 """ 
 I separated the assignments into functions. They are called at the bottom of this file.
 """
+import random
 
 import pandas as pd
 import numpy as np
@@ -106,7 +107,7 @@ def assignment_2(_df_cia_factbook):
         # Check if user input match any of the countries
         # (I think this breaks down if the user input is for example 'a')
         elif fb_sorted['country'].str.contains(user_input).any():
-            # I do a fancy thing here, 
+            # I do a fancy thing here,
             # I collect the 6 closest countries i a dataframe instead of just printing it
             row_index = fb_sorted.loc[fb_sorted['country'] == user_input].index[0]
 
@@ -295,6 +296,28 @@ def assignment_3_choice_3(_df_cia_factbook):
                 string_migration + " "*padding_migration +\
                 string_growth)
     print('')
+
+    # Stack the lowest and highest dataframe on top of each other
+    df_result = pd.concat([df_lowest, df_highest], axis=0)
+
+    # Fancy list comprehension a barely understand that creates 10 random colors
+    colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(10)]
+
+    # The plot of the results
+    df_result.plot(x='country',
+                   y='population_growth_rate',
+                   kind='bar',
+                   color=colors,                    # Use the 10 random colors from above
+                   legend=False,                    # Legend is unnecessary here
+                   grid=True,                       # Add grid
+                   figsize=(10,6))                  # Make it bigger
+
+    plt.subplots_adjust(bottom=0.25)                # Put window in middle of screen
+    plt.xticks(rotation=45)                         # Rotate the names on the x-axis
+    plt.title('Highest Population Decline and Highest Population Growth')
+    plt.xlabel('Country')
+    plt.ylabel('Population Growth Rate in Percent')
+    plt.show()
 
 
 def assignment_3_print_menu():
