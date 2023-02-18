@@ -259,8 +259,8 @@ def assignment_3_choice_3(_df_cia_factbook):
         string_migration = f"{row['net_migration_rate']:.1f}"
         string_growth = f"{row['population_growth_rate']:.1f}"
 
-        padding_country = max(30 - len(string_country), 0)      # Saint Pierre are the limiting factor
-        padding_birth = max(16 - len(string_birth), 0)          # 16 left some space between the header
+        padding_country = max(30 - len(string_country), 0) # Saint Pierre are the limiting factor
+        padding_birth = max(16 - len(string_birth), 0)     # 16 left some space between the header
         padding_death = max(16 - len(string_death), 0)
         padding_migration = max(16 - len(string_migration), 0)
 
@@ -272,7 +272,7 @@ def assignment_3_choice_3(_df_cia_factbook):
                 string_migration + " "*padding_migration +\
                 string_growth)
 
-    # The first and second prints are the same. I could do it in a function but I thought 
+    # The first and second prints are the same. I could do it in a function but I thought
     # I had enough functions as it is...
     print('Highest growth:')
     for _,row in df_highest.iterrows():
@@ -295,8 +295,6 @@ def assignment_3_choice_3(_df_cia_factbook):
                 string_migration + " "*padding_migration +\
                 string_growth)
     print('')
-
-    
 
 
 def assignment_3_print_menu():
