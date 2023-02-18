@@ -256,7 +256,7 @@ def assignment_3_choice_3(_df_cia_factbook):
     # I needed extra padding here as well because of a little weird silly country
     # called "Saint Pierre and Miquelon"
     print('')
-    print(' The Countries with highest percentage population decline and growth: ')
+    print(' The Countries with Highest Percentage Population Decline and Growth: ')
     print('   Country:                   Births rate:    Death rate:     Net migration:  Population change')
     print('                             [/1000 people]  [/1000 people]   [/1000 people]   [percent]')
     print('---------------------------------------------------------------------------------------------------')
