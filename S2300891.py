@@ -224,9 +224,19 @@ def assignment_3_choice_3(_df_cia_factbook):
                                 + _df_cia_factbook['net_migration_rate'])\
                                 * 0.1 # This is times 100 for percent divided på 1000 
 
-    # population_growth_rateg
+    _df_cia_factbook['population_growth_rate'] = population_growth_rate
 
-    print(population_growth_rate)
+    df_cleaned = _df_cia_factbook.dropna(subset=['population_growth_rate'])
+    df_sorted = df_cleaned.sort_values('population_growth_rate')
+
+    df_lowest = df_sorted[:5]
+
+    df_highest = df_sorted[-5:]
+    df_highest = df_highest.sort_values('population_growth_rate', ascending=False)
+
+    print(df_lowest)
+    print(df_highest)
+
 
 def assignment_3_print_menu():
     """ Print out the menu text"""
