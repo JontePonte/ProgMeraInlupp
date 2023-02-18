@@ -350,7 +350,7 @@ def assignment_3_print_menu():
 
 
 def assignment_3(_df_cia_factbook):
-    """ My solution to assignment 3 """
+    """ My solution to assignment 3. This function is called at the bottom of the file """
     # Call the print menu function
     assignment_3_print_menu()
 
@@ -388,6 +388,13 @@ def assignment_3(_df_cia_factbook):
         print('')
 
 
+####################################### 4 start #######################################
+
+def assignment_4(_df_worldpubind):
+    """ My solution to assignment 4. This function is called at the bottom of this file """
+    print(_df_worldpubind)
+
+
 ##################### This is where the assignments are called ########################
 
 # The data in the csv-files are stored in dataframe objects with correct names
@@ -395,5 +402,10 @@ def assignment_3(_df_cia_factbook):
 df_cia_factbook, df_worldcities, df_worldpubind = assignment_1() # assignment_1 returns the data
 
 
+"""
+The functions for the assignments are called here.
+You should probably only have 1 uncommented.
+"""
 # assignment_2(df_cia_factbook)
-assignment_3(df_cia_factbook)
+# assignment_3(df_cia_factbook)
+assignment_4(df_worldpubind)
