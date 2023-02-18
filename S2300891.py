@@ -218,8 +218,15 @@ def assignment_3_choice_2(_df_cia_factbook):
 
 def assignment_3_choice_3(_df_cia_factbook):
     """ Solution for choice 3 """
-    print('Choice 3')
-    print(_df_cia_factbook.index)
+    # Calculate the population growth rate in percent
+    population_growth_rate = (  + _df_cia_factbook['birth_rate']\
+                                - _df_cia_factbook['death_rate']\
+                                + _df_cia_factbook['net_migration_rate'])\
+                                * 0.1 # This is times 100 for percent divided på 1000 
+
+    # population_growth_rateg
+
+    print(population_growth_rate)
 
 def assignment_3_print_menu():
     """ Print out the menu text"""
@@ -248,7 +255,7 @@ def assignment_3(_df_cia_factbook):
     while is_running:
         # User menu input is stored in "choice"
         # choice = input('     Choose a menu option (0 for info): ')
-        choice = '2'
+        choice = '3'
         print('')
         print('')
 
@@ -258,10 +265,10 @@ def assignment_3(_df_cia_factbook):
             input('press enter')
         elif choice == '2':
             assignment_3_choice_2(_df_cia_factbook)
-            # input('press enter')
+            input('press enter')
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
-            input('press enter')
+            # input('press enter')
         # choice 4 stops the program
         elif choice == '4':
             print('Program stop')
