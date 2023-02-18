@@ -226,13 +226,17 @@ def assignment_3_choice_3(_df_cia_factbook):
                                 + _df_cia_factbook['net_migration_rate'])\
                                 * 0.1 # This is times 100 for percent divided på 1000 
 
+    # Add it to the main dataframe
     _df_cia_factbook['population_growth_rate'] = population_growth_rate
 
+    # Remove all rows with NaN in population growth rate and sort 
     df_cleaned = _df_cia_factbook.dropna(subset=['population_growth_rate'])
     df_sorted = df_cleaned.sort_values('population_growth_rate')
 
+    # df_lowest contains the countries with lowest pop growth
     df_lowest = df_sorted[:5]
 
+    # df_highest contains the countries with highest pop growth (from high to low)
     df_highest = df_sorted[-5:]
     df_highest = df_highest.sort_values('population_growth_rate', ascending=False)
 
@@ -244,8 +248,9 @@ def assignment_3_choice_3(_df_cia_factbook):
     print('                             [/1000 people]  [/1000 people]   [/1000 people]   [percent]')
     print('---------------------------------------------------------------------------------------------------')
 
-    # Country name, population and internet user per 100000 people are printed
-    # Same as choice 1, I add padding to get all rows lined up
+    # The print is a bit messy. First strings are created (I choose one decimal place).
+    # Then padding (of spaces) are calculated to get them under each other.
+    # After that the strings and padding are printed
     print('Highest decline:')
     for _,row in df_lowest.iterrows():
         string_country = row['country']
@@ -254,8 +259,8 @@ def assignment_3_choice_3(_df_cia_factbook):
         string_migration = f"{row['net_migration_rate']:.1f}"
         string_growth = f"{row['population_growth_rate']:.1f}"
 
-        padding_country = max(30 - len(string_country), 0)
-        padding_birth = max(16 - len(string_birth), 0)
+        padding_country = max(30 - len(string_country), 0)      # Saint Pierre are the limiting factor
+        padding_birth = max(16 - len(string_birth), 0)          # 16 left some space between the header
         padding_death = max(16 - len(string_death), 0)
         padding_migration = max(16 - len(string_migration), 0)
 
@@ -267,6 +272,8 @@ def assignment_3_choice_3(_df_cia_factbook):
                 string_migration + " "*padding_migration +\
                 string_growth)
 
+    # The first and second prints are the same. I could do it in a function but I thought 
+    # I had enough functions as it is...
     print('Highest growth:')
     for _,row in df_highest.iterrows():
         string_country = row['country']
@@ -288,6 +295,8 @@ def assignment_3_choice_3(_df_cia_factbook):
                 string_migration + " "*padding_migration +\
                 string_growth)
     print('')
+
+    
 
 
 def assignment_3_print_menu():
