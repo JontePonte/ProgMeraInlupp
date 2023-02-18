@@ -35,13 +35,25 @@ def assignment_1():
 
 def assignment_2_plot(df_output, main_title):
     """ The plot function for assignment 2 """
-    # Plot the country and density as a bar diagram without legend
-    df_output.plot(x='country', y='density', kind='bar', legend=False)
+    # I learned to do really fancy plots in this assignment
+
+    # First a really really fancy list comprehension that create random colors
+    colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(df_output.shape[0])]
+
+    # Plot the relevant results
+    df_output.plot(x='country',
+                   y='density',
+                   kind='bar',          # Bar diagram
+                   color=colors,        # Add the fancy color
+                   legend=False,        # Remove unnecessary legend
+                   figsize=(10,6))      # Make it bigger
 
     # Set all labels and print the diagram
     plt.xlabel('Country')
     plt.ylabel('[People/km^2]')
     plt.title(main_title)
+    plt.subplots_adjust(bottom=0.25)                # Put window in middle of screen
+    plt.xticks(rotation=45)                         # Rotate the names on the x-axis
     plt.show()
 
 
@@ -346,8 +358,7 @@ def assignment_3(_df_cia_factbook):
     is_running = True
     while is_running:
         # User menu input is stored in "choice"
-        # choice = input('     Choose a menu option (0 for info): ')
-        choice = '3'
+        choice = input('     Choose a menu option (0 for info): ')
         print('')
         print('')
 
@@ -360,7 +371,7 @@ def assignment_3(_df_cia_factbook):
             input('press enter')
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
-            # input('press enter')
+            input('press enter')
         # choice 4 stops the program
         elif choice == '4':
             print('Program stop')
@@ -375,9 +386,6 @@ def assignment_3(_df_cia_factbook):
         # Add extra rows to separate outputs
         print('')
         print('')
-
-        is_running = False
-
 
 
 ##################### This is where the assignments are called ########################
