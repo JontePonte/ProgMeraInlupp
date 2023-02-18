@@ -189,6 +189,8 @@ def assignment_3_choice_2(_df_cia_factbook):
 
     # I tried to match the example output but needed more space (literary)
     # This because Congo has such a ridiculously long name...
+    print('')
+    print(' The countries with lowest and highest quotient of internet users:')
     print('     Country:                           Population:           Internet users:          ')
     print('                                                              [per 100000 inhabitants] ')
     print('---------------------------------------------------------------------------------------')
@@ -234,8 +236,58 @@ def assignment_3_choice_3(_df_cia_factbook):
     df_highest = df_sorted[-5:]
     df_highest = df_highest.sort_values('population_growth_rate', ascending=False)
 
-    print(df_lowest)
-    print(df_highest)
+    # I needed extra padding here as well because of a little weird silly country
+    # called "Saint Pierre and Miquelon"
+    print('')
+    print(' The Countries with highest percentage population decline and growth: ')
+    print('   Country:                   Births rate:    Death rate:     Net migration:  Population change')
+    print('                             [/1000 people]  [/1000 people]   [/1000 people]   [percent]')
+    print('---------------------------------------------------------------------------------------------------')
+
+    # Country name, population and internet user per 100000 people are printed
+    # Same as choice 1, I add padding to get all rows lined up
+    print('Highest decline:')
+    for _,row in df_lowest.iterrows():
+        string_country = row['country']
+        string_birth = f"{row['birth_rate']:.1f}"
+        string_death = f"{row['death_rate']:.1f}"
+        string_migration = f"{row['net_migration_rate']:.1f}"
+        string_growth = f"{row['population_growth_rate']:.1f}"
+
+        padding_country = max(30 - len(string_country), 0)
+        padding_birth = max(16 - len(string_birth), 0)
+        padding_death = max(16 - len(string_death), 0)
+        padding_migration = max(16 - len(string_migration), 0)
+
+        print(\
+                " "*3 +\
+                string_country + " "*padding_country +\
+                string_birth + " "*padding_birth +\
+                string_death + " "*padding_death +\
+                string_migration + " "*padding_migration +\
+                string_growth)
+
+    print('Highest growth:')
+    for _,row in df_highest.iterrows():
+        string_country = row['country']
+        string_birth = f"{row['birth_rate']:.1f}"
+        string_death = f"{row['death_rate']:.1f}"
+        string_migration = f"{row['net_migration_rate']:.1f}"
+        string_growth = f"{row['population_growth_rate']:.1f}"
+
+        padding_country = max(30 - len(string_country), 0)
+        padding_birth = max(16 - len(string_birth), 0)
+        padding_death = max(16 - len(string_death), 0)
+        padding_migration = max(16 - len(string_migration), 0)
+
+        print(\
+                " "*3 +\
+                string_country + " "*padding_country +\
+                string_birth + " "*padding_birth +\
+                string_death + " "*padding_death +\
+                string_migration + " "*padding_migration +\
+                string_growth)
+    print('')
 
 
 def assignment_3_print_menu():
