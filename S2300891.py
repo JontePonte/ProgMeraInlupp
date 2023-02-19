@@ -392,13 +392,29 @@ def assignment_3(_df_cia_factbook):
 
 def assignment_4a(_df_worldpubind):
     """ My solution to assignment 4a. This function is called at the bottom of this file """
+    # Calculate growth between 1960 and 2021 according to formula in instructions
     growth = (_df_worldpubind['2021'] - _df_worldpubind['1960']) / _df_worldpubind['1960'] *100
-    _df_worldpubind['growth'] = growth
+    _df_worldpubind['growth'] = growth # Then add it to dataframe
 
+    # Same old cleaning and sorting of the dataframe
     df_cleaned = _df_worldpubind.dropna(subset=['growth'])
     df_sorted = df_cleaned.sort_values('growth')
-    
-    print(df_sorted)
+
+    # Same old picking out five lowest and highest
+    df_lowest = df_sorted[:5]
+    df_highest = df_sorted[-5:]
+    df_highest.sort_values('growth', ascending=False)
+
+    print(df_lowest)
+    plt.subplot(2,1,1)
+    df_lowest.plot(x='Country Name',
+                    y='growth',
+                    kind='bar',)
+    plt.subplot(2,1,2)
+    df_highest.plot(x='Country Name',
+                    y='growth',
+                    kind='bar',)
+    plt.show()
 
 
 def assignment_4b(_df_worldpubind):
