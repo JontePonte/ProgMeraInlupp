@@ -390,8 +390,19 @@ def assignment_3(_df_cia_factbook):
 
 ####################################### 4 start #######################################
 
-def assignment_4(_df_worldpubind):
-    """ My solution to assignment 4. This function is called at the bottom of this file """
+def assignment_4a(_df_worldpubind):
+    """ My solution to assignment 4a. This function is called at the bottom of this file """
+    growth = (_df_worldpubind['2021'] - _df_worldpubind['1960']) / _df_worldpubind['1960'] *100
+    _df_worldpubind['growth'] = growth
+
+    df_cleaned = _df_worldpubind.dropna(subset=['growth'])
+    df_sorted = df_cleaned.sort_values('growth')
+    
+    print(df_sorted)
+
+
+def assignment_4b(_df_worldpubind):
+    """ My solution to assignment 4b. This function is called at the bottom of this file """
     print(_df_worldpubind)
 
 
@@ -408,4 +419,5 @@ You should probably only have 1 uncommented.
 """
 # assignment_2(df_cia_factbook)
 # assignment_3(df_cia_factbook)
-assignment_4(df_worldpubind)
+assignment_4a(df_worldpubind)
+# assignment_4b(df_worldpubind)
