@@ -466,7 +466,7 @@ def assignment_4b(_df_worldpubind):
     print('')
 
     # country_choice = input('        Choose a country: ')
-    country_choice = 'Swede'
+    country_choice = 'Sweden'
 
     # Create a set of all countries in the data file to enable input check
     countries_set = set(_df_worldpubind['Country Name'].to_list())
