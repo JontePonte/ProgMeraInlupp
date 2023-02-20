@@ -473,7 +473,7 @@ def assignment_4b(_df_worldpubind):
     # Check user input until a correct country is chosen
     while not country_choice in countries_set:
         print('        The country is not in this data set. Try again')
-        country_choice = input('        Try again:')
+        country_choice = input('        Choose a new country:')
 
     # Single out the selected country. I use a dataframe with just the
     # selected country
