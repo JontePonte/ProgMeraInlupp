@@ -456,7 +456,16 @@ def assignment_4a(_df_worldpubind):
 
 def assignment_4b(_df_worldpubind):
     """ My solution to assignment 4b. This function is called at the bottom of this file """
-    print(_df_worldpubind)
+    print('')
+    print('############################## Assignment 4b #############################')
+    print('')
+    print('        Write the name of a country to view the population change')
+    print('        between 1961 and 2021.')
+    print('')
+    # country_choice = input('        Choose a country: ')
+    country_choice = 'Sweden'
+
+    print(country_choice)
 
 
 ##################### This is where the assignments are called ########################
@@ -472,5 +481,5 @@ You should probably only have 1 uncommented.
 """
 # assignment_2(df_cia_factbook)
 # assignment_3(df_cia_factbook)
-assignment_4a(df_worldpubind)
-# assignment_4b(df_worldpubind)
+# assignment_4a(df_worldpubind)
+assignment_4b(df_worldpubind)
