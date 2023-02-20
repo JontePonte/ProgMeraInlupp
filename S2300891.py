@@ -480,9 +480,8 @@ def assignment_4b(_df_worldpubind):
     test = _df_worldpubind['Country Name'] == country_choice
     df_country_choice = _df_worldpubind.loc[test]
 
-    # Extract the relevant data from the dataframe.This could probably be done better?
-    years = df_country_choice.columns.tolist()[3:]
-    population = df_country_choice.values.tolist()[0][3:]
+    years = df_country_choice.columns.tolist()[2:]
+    population = df_country_choice.values.tolist()[0][2:]
 
     # Create a new dataframe with just the relevant data
     df_populations = pd.DataFrame({'population': population, 'years': years})
