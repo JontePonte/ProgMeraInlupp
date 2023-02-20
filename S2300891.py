@@ -472,9 +472,11 @@ def assignment_4b(_df_worldpubind):
     years = df_country_choice.columns.tolist()[3:]
     population = df_country_choice.values.tolist()[0][3:]
 
-    df_populations = pd.DataFrame(population, years)
+    df_populations = pd.DataFrame({'population': population, 'years': years})
 
-    df_populations.plot()
+    print(df_populations)
+    df_populations.plot(x='years',
+                        y='population')
     plt.show()
 
 
