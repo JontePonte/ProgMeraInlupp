@@ -456,14 +456,22 @@ def assignment_4a(_df_worldpubind):
 
 def assignment_4b(_df_worldpubind):
     """ My solution to assignment 4b. This function is called at the bottom of this file """
+
+    # Print a simple menu to take the user input.
     print('')
     print('############################## Assignment 4b #############################')
     print('')
     print('        Write the name of a country to view the population change')
     print('        between 1961 and 2021.')
     print('')
+
     # country_choice = input('        Choose a country: ')
-    country_choice = 'Sweden'
+    country_choice = 'Swede'
+
+    countries_set = set(_df_worldpubind['Country Name'].to_list())
+    while not country_choice in countries_set:
+        print('        The country is not in this data set. Try again')
+        country_choice = input('        Try again:')
 
     print(country_choice)
     test = _df_worldpubind['Country Name'] == country_choice
