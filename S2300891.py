@@ -466,6 +466,16 @@ def assignment_4b(_df_worldpubind):
     country_choice = 'Sweden'
 
     print(country_choice)
+    test = _df_worldpubind['Country Name'] == country_choice
+    df_country_choice = _df_worldpubind.loc[test]
+
+    years = df_country_choice.columns.tolist()[3:]
+    population = df_country_choice.values.tolist()[0][3:]
+
+    df_populations = pd.DataFrame(population, years)
+
+    df_populations.plot()
+    plt.show()
 
 
 ##################### This is where the assignments are called ########################
