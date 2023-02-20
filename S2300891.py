@@ -468,20 +468,26 @@ def assignment_4b(_df_worldpubind):
     # country_choice = input('        Choose a country: ')
     country_choice = 'Swede'
 
+    # Create a set of all countries in the data file to enable input check
     countries_set = set(_df_worldpubind['Country Name'].to_list())
+    # Check user input until a correct country is chosen
     while not country_choice in countries_set:
         print('        The country is not in this data set. Try again')
         country_choice = input('        Try again:')
 
-    print(country_choice)
+    # Single out the selected country. I use a dataframe with just the
+    # selected country
     test = _df_worldpubind['Country Name'] == country_choice
     df_country_choice = _df_worldpubind.loc[test]
 
+    # Extract the relevant data from the dataframe.This could probably be done better?
     years = df_country_choice.columns.tolist()[3:]
     population = df_country_choice.values.tolist()[0][3:]
 
+    # Create a new dataframe with just the relevant data
     df_populations = pd.DataFrame({'population': population, 'years': years})
 
+    # Print the data
     print(df_populations)
     df_populations.plot(x='years',
                         y='population')
