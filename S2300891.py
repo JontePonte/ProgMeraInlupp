@@ -408,11 +408,16 @@ def assignment_4a(_df_worldpubind):
     _, axes = plt.subplots(nrows=2,
                            ncols=1,
                            figsize=(8, 7),)
+    
+
+    colors_l = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
+    colors_h = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
 
     df_lowest.plot(ax=axes[0],
                    x='Country Name',
                    y='growth',
                    kind='bar',
+                   color=colors_l,
                    grid=True,
                    legend=False)
 
@@ -420,11 +425,24 @@ def assignment_4a(_df_worldpubind):
                     x='Country Name',
                     y='growth',
                     kind='bar',
+                    color=colors_h,
                     grid=True,
                     legend=False)
-    
-    axes[0].tick_params('x', labelrotation=30)
-    axes[1].tick_params('x', labelrotation=30)
+
+    axes[0].tick_params('x', labelrotation=30, labelsize=8)
+    axes[0].tick_params('y', labelrotation=0, labelsize=8)
+    axes[1].tick_params('x', labelrotation=30, labelsize=8)
+    axes[1].tick_params('y', labelrotation=0, labelsize=8)
+
+    axes[0].set_ylabel('[Percent]', fontsize=8)
+    axes[1].set_ylabel('[Percent]', fontsize=8)
+
+    axes[0].set_xlabel('', fontsize=8)
+    axes[1].set_xlabel('', fontsize=8)
+
+    axes[0].set_title('Countries with highest population decline between 1960 and 2021', fontsize=10)
+    axes[1].set_title('Countries with highest population growth between 1960 and 2021', fontsize=10)
+
     plt.subplots_adjust(top=0.9, bottom=0.25, hspace=0.5)
     plt.show()
 
