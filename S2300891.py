@@ -403,17 +403,29 @@ def assignment_4a(_df_worldpubind):
     # Same old picking out five lowest and highest
     df_lowest = df_sorted[:5]
     df_highest = df_sorted[-5:]
-    df_highest.sort_values('growth', ascending=False)
+    df_highest = df_highest.sort_values('growth', ascending=False)
 
-    print(df_lowest)
-    plt.subplot(2,1,1)
-    df_lowest.plot(x='Country Name',
+    _, axes = plt.subplots(nrows=2,
+                           ncols=1,
+                           figsize=(8, 7),)
+
+    df_lowest.plot(ax=axes[0],
+                   x='Country Name',
+                   y='growth',
+                   kind='bar',
+                   grid=True,
+                   legend=False)
+
+    df_highest.plot(ax=axes[1],
+                    x='Country Name',
                     y='growth',
-                    kind='bar',)
-    plt.subplot(2,1,2)
-    df_highest.plot(x='Country Name',
-                    y='growth',
-                    kind='bar',)
+                    kind='bar',
+                    grid=True,
+                    legend=False)
+    
+    axes[0].tick_params('x', labelrotation=30)
+    axes[1].tick_params('x', labelrotation=30)
+    plt.subplots_adjust(top=0.9, bottom=0.25, hspace=0.5)
     plt.show()
 
 
