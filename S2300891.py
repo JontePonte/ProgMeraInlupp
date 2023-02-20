@@ -405,15 +405,18 @@ def assignment_4a(_df_worldpubind):
     df_highest = df_sorted[-5:]
     df_highest = df_highest.sort_values('growth', ascending=False)
 
+    # Create a subplot object to enable subplots (_ = fig and isn't used)
     _, axes = plt.subplots(nrows=2,
                            ncols=1,
                            figsize=(8, 7),)
     
 
+    # Same old fancy color trick as before
     colors_l = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
     colors_h = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
 
-    df_lowest.plot(ax=axes[0],
+    # Plot the results
+    df_lowest.plot(ax=axes[0],          # Put lowest df on top
                    x='Country Name',
                    y='growth',
                    kind='bar',
@@ -421,7 +424,7 @@ def assignment_4a(_df_worldpubind):
                    grid=True,
                    legend=False)
 
-    df_highest.plot(ax=axes[1],
+    df_highest.plot(ax=axes[1],         # Put highest under
                     x='Country Name',
                     y='growth',
                     kind='bar',
@@ -429,6 +432,7 @@ def assignment_4a(_df_worldpubind):
                     grid=True,
                     legend=False)
 
+    # Make all the labels prettier
     axes[0].tick_params('x', labelrotation=30, labelsize=8)
     axes[0].tick_params('y', labelrotation=0, labelsize=8)
     axes[1].tick_params('x', labelrotation=30, labelsize=8)
@@ -437,12 +441,15 @@ def assignment_4a(_df_worldpubind):
     axes[0].set_ylabel('[Percent]', fontsize=8)
     axes[1].set_ylabel('[Percent]', fontsize=8)
 
-    axes[0].set_xlabel('', fontsize=8)
-    axes[1].set_xlabel('', fontsize=8)
+    # Remove x-labels (could probably be done better)
+    axes[0].set_xlabel('')
+    axes[1].set_xlabel('')
 
+    # Set titles with fontsize
     axes[0].set_title('Countries with highest population decline between 1960 and 2021', fontsize=10)
     axes[1].set_title('Countries with highest population growth between 1960 and 2021', fontsize=10)
 
+    # This one sets the plots higher up on screen and add space between them
     plt.subplots_adjust(top=0.9, bottom=0.25, hspace=0.5)
     plt.show()
 
