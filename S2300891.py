@@ -7,6 +7,10 @@ So go to the bottom of the file and try them out!
 (all function calls has the corresponding line number besides them)
 
 Assignment 1 is always called as it's needed for the other ones.
+
+P.S.
+I try to do all my programming in english. In part because I really need to practice my 
+english writing but mostly because my editor has a english spell-checker :)
 """
 import random
 
