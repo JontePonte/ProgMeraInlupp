@@ -556,10 +556,12 @@ def assignment_5(_df_worldcities):
         biggest_city = _df_worldcities.loc[index_of_biggest_city]['city_ascii']
         population_of_city = f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}"
 
+        # Create padding to get the prints straight
         padding_country = max(25 - len(country), 0)
         padding_cities_in = max(20 - len(str(cities_in_country)), 0)
         padding_biggest_city = max(18 - len(biggest_city), 0)
 
+        # Print everything with the right padding
         print(  "  " +\
                 country + " "*padding_country +\
                 str(cities_in_country) + " "*padding_cities_in+\
