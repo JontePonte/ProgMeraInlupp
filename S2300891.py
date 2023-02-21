@@ -527,6 +527,21 @@ def assignment_4b(_df_worldpubind):
     plt.show()
 
 
+####################################### 5 start #######################################
+
+def assignment_5(_df_worldcities):
+    """ My solution to assignment 5. This function is called at the bottom of this file """
+    df_groups = _df_worldcities.groupby('country')
+    number_of_cities = df_groups.size()
+    number_of_cities = number_of_cities.sort_values(ascending=False)
+
+    most_cities = number_of_cities[:10]
+
+    for country, cities_in_country in most_cities.iteritems():
+        
+        print(f"{country} {cities_in_country}")
+    # number_of_cities = df_groups.sort_values(''
+
 ##################### This is where the assignments are called ########################
 
 # The data in the csv-files are stored in dataframe objects with correct names
@@ -541,4 +556,5 @@ You should probably only have 1 uncommented.
 # assignment_2(df_cia_factbook)
 # assignment_3(df_cia_factbook)
 # assignment_4a(df_worldpubind)
-assignment_4b(df_worldpubind)
+# assignment_4b(df_worldpubind)
+assignment_5(df_worldcities)
