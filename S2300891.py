@@ -540,20 +540,28 @@ def assignment_5(_df_worldcities):
     # Pick the 10 countries with the most cities
     most_cities = number_of_cities[:10]
 
-    biggest_city = []
-    population_of_city = []
+    # Prepare two lists for the upcoming super-dataframe
+    biggest_cities = []
+    population_of_cities = []
 
+    # Store all needed data in the two lists using a loop
     for country, _ in most_cities.items():
-        # Get the index the the current country
+        # Get the index the biggest city in the current country
         index_of_biggest_city = index_of_biggest_cities[country]
 
-        # With the index the biggest city and population of that city can be extracted
-        biggest_city.append(_df_worldcities.loc[index_of_biggest_city]['city_ascii'])
-        population_of_city.append(f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}")
+        # Extract the biggest city and population using the index
+        biggest_city = _df_worldcities.loc[index_of_biggest_city]['city_ascii']
+        population_of_city = f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}"
 
+        # I allow myself to use append here. The 10 memory jumps shouldn't 
+        # affect runtime to much
+        biggest_cities.append(biggest_city)
+        population_of_cities.append(population_of_city)
+
+    # Create a dataframe from most_cities Series and add the new data
     df_most_cities = most_cities.to_frame()
-    df_most_cities['biggest_city'] = biggest_city
-    df_most_cities['population_of_city'] = population_of_city
+    df_most_cities['biggest_city'] = biggest_cities
+    df_most_cities['population_of_city'] = population_of_cities
 
     print('')
     print(' The 10 countries with the highest number of cities: ')
