@@ -486,11 +486,45 @@ def assignment_4b(_df_worldpubind):
     # Create a new dataframe with just the relevant data
     df_populations = pd.DataFrame({'population': population, 'years': years})
 
+    # Create a list to store population growth
+    # I do this before the calculation loop to avoid append and decrease runtime
+    # Every year that doesn't have a value should be NaN so I set all to NaN from start
+    growth_list = [np.nan]*df_populations.shape[0]
+
+    # Create iterable object for all the rows
+    iterator = df_populations.iterrows()
+    next(iterator) # Skip 1960
+    for index, row in iterator:
+        pop_the_year_before = df_populations.loc[index-1]['population']
+        pop_this_year = row['population']
+        growth_list[index] = (pop_this_year - pop_the_year_before) / pop_the_year_before * 100
+
+    df_populations['growth'] = growth_list
+
     # Print the data
-    print(df_populations)
+    _, ax = plt.subplots(figsize=(11, 7))
+
     df_populations.plot(x='years',
-                        y='population')
+                        y='population',
+                        ax=ax,
+                        color='b')
+
+    ax2 = ax.twinx()
+    df_populations.plot(x='years',
+                        y='growth',
+                        ax=ax2,
+                        color='r')
+    ax2.legend(loc='upper right')
+
+    # add plot title and axis labels
+    ax.set_title(f'Population and population growth for {country_choice}')
+    ax.set_xlabel('Year')
+    ax.set_ylabel('Population [people] (blue)')
+    ax2.set_ylabel('Population growth [percent] (red)')
+
+    # display the plot
     plt.show()
+
 
 
 ##################### This is where the assignments are called ########################
