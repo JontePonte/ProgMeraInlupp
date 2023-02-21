@@ -501,28 +501,28 @@ def assignment_4b(_df_worldpubind):
 
     df_populations['growth'] = growth_list
 
-    # Print the data
+    # Plot the data
     _, ax = plt.subplots(figsize=(11, 7))
 
+    # Plot population first
     df_populations.plot(x='years',
                         y='population',
                         ax=ax,
                         color='b')
 
+    # Plot growth in the same plot
     ax2 = ax.twinx()
     df_populations.plot(x='years',
                         y='growth',
                         ax=ax2,
                         color='r')
-    ax2.legend(loc='upper right')
+    ax2.legend(loc='upper right') # Move growth legend to match instruction
 
-    # add plot title and axis labels
     ax.set_title(f'Population and population growth for {country_choice}')
     ax.set_xlabel('Year')
     ax.set_ylabel('Population [people] (blue)')
     ax2.set_ylabel('Population growth [percent] (red)')
 
-    # display the plot
     plt.show()
 
 
