@@ -465,11 +465,11 @@ def assignment_4b(_df_worldpubind):
     print('        between 1961 and 2021.')
     print('')
 
-    # country_choice = input('        Choose a country: ')
-    country_choice = 'Sweden'
+    country_choice = input('        Choose a country: ')
 
     # Create a set of all countries in the data file to enable input check
     countries_set = set(_df_worldpubind['Country Name'].to_list())
+
     # Check user input until a correct country is chosen
     while not country_choice in countries_set:
         print('        The country is not in this data set. Try again')
@@ -509,6 +509,7 @@ def assignment_4b(_df_worldpubind):
                         y='population',
                         ax=ax,
                         color='b')
+    ax.legend(loc='upper left')
 
     # Plot growth in the same plot
     ax2 = ax.twinx()
