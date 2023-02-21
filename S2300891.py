@@ -501,7 +501,7 @@ def assignment_4b(_df_worldpubind):
 
     df_populations['growth'] = growth_list
 
-    # Plot the data
+    # Plot the data, the fig part of this is not needed (that's why the _)
     _, ax = plt.subplots(figsize=(11, 7))
 
     # Plot population first
@@ -509,7 +509,7 @@ def assignment_4b(_df_worldpubind):
                         y='population',
                         ax=ax,
                         color='b')
-    ax.legend(loc='upper left')
+    ax.legend(loc='upper left') # Move population legend to match instruction
 
     # Plot growth in the same plot
     ax2 = ax.twinx()
@@ -525,7 +525,6 @@ def assignment_4b(_df_worldpubind):
     ax2.set_ylabel('Population growth [percent] (red)')
 
     plt.show()
-
 
 
 ##################### This is where the assignments are called ########################
