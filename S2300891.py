@@ -540,6 +540,21 @@ def assignment_5(_df_worldcities):
     # Pick the 10 countries with the most cities
     most_cities = number_of_cities[:10]
 
+    biggest_city = []
+    population_of_city = []
+
+    for country, _ in most_cities.items():
+        # Get the index the the current country
+        index_of_biggest_city = index_of_biggest_cities[country]
+
+        # With the index the biggest city and population of that city can be extracted
+        biggest_city.append(_df_worldcities.loc[index_of_biggest_city]['city_ascii'])
+        population_of_city.append(f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}")
+
+    df_most_cities = most_cities.to_frame()
+    df_most_cities['biggest_city'] = biggest_city
+    df_most_cities['population_of_city'] = population_of_city
+
     print('')
     print(' The 10 countries with the highest number of cities: ')
     print('')
@@ -548,13 +563,12 @@ def assignment_5(_df_worldcities):
 
     # Iterate over the 10 most city-full countries,
     # The country and number of cities are extracted right away
-    for country, cities_in_country in most_cities.items():
+    for country, row in df_most_cities.iterrows():
         # Get the index the the current country
-        index_of_biggest_city = index_of_biggest_cities[country]
 
-        # With the index the biggest city and population of that city can be extracted
-        biggest_city = _df_worldcities.loc[index_of_biggest_city]['city_ascii']
-        population_of_city = f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}"
+        cities_in_country = row[0]
+        biggest_city = row['biggest_city']
+        population_of_city = row['population_of_city']
 
         # Create padding to get the prints straight
         padding_country = max(25 - len(country), 0)
