@@ -1,5 +1,12 @@
 """ 
-I separated the assignments into functions. They are called at the bottom of this file.
+I separated all the assignments into functions. They are called at the bottom of this file.
+This allows for the assignments to be called separately by having just one of the 
+function calls uncommented at ones.
+
+So go to the bottom of the file and try them out!
+(all function calls has the corresponding line number besides them)
+
+Assignment 1 is always called as it's needed for the other ones.
 """
 import random
 
@@ -30,8 +37,8 @@ def assignment_1():
     return fact_book, world_cities, world_pub_ind
 
 
-
 ####################################### 2 start #######################################
+# Assignment 2 is separated into a main function and a plot function.
 
 def assignment_2_plot(df_output, main_title):
     """ The plot function for assignment 2 """
@@ -142,6 +149,8 @@ def assignment_2(_df_cia_factbook):
 
 
 ####################################### 3 start #######################################
+# I separated this one into 3 different functions fro each menu choice. Below them there
+# is a little print function and the main menu function.
 
 def assignment_3_choice_1(_df_cia_factbook):
     """ Solution for choice 1 """
@@ -385,6 +394,8 @@ def assignment_3(_df_cia_factbook):
 
 
 ####################################### 4 start #######################################
+# I split assignment 4 into two main function as they are quite separate. You need to
+# call them separately.
 
 def assignment_4a(_df_worldpubind):
     """ My solution to assignment 4a. This function is called at the bottom of this file """
@@ -405,7 +416,6 @@ def assignment_4a(_df_worldpubind):
     _, axes = plt.subplots(nrows=2,
                            ncols=1,
                            figsize=(8, 7),)
-    
 
     # Same old fancy color trick as before
     colors_l = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
@@ -524,6 +534,8 @@ def assignment_4b(_df_worldpubind):
 
 
 ####################################### 5 start #######################################
+# Assignment 5 is quite straight forward. Just a single function with all the data
+# manipulation, prints and plots
 
 def assignment_5(_df_worldcities):
     """ My solution to assignment 5. This function is called at the bottom of this file """
@@ -599,7 +611,6 @@ def assignment_5(_df_worldcities):
                            ncols=1,
                            figsize=(8, 7),)
     
-
     # Same old fancy color trick as before
     colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(10)]    
 
