@@ -531,19 +531,29 @@ def assignment_4b(_df_worldpubind):
 
 def assignment_5(_df_worldcities):
     """ My solution to assignment 5. This function is called at the bottom of this file """
+    # Group cities by country
     df_groups = _df_worldcities.groupby('country')
-    
-    index_of_biggest_cities = df_groups['population'].idxmax()
-    
-    number_of_cities = df_groups.size()
-    number_of_cities = number_of_cities.sort_values(ascending=False)
 
+    # Get the index of each the biggest city of each country
+    index_of_biggest_cities = df_groups['population'].idxmax()
+
+    # Create a Series object with the number of cities in each country
+    number_of_cities = df_groups.size()
+    number_of_cities = number_of_cities.sort_values(ascending=False) # And sort it
+
+    # Pick the 10 countries with the most cities
     most_cities = number_of_cities[:10]
 
+    # Iterate over the 10 most city-full countries,
+    # The country and number of cities are extracted right away
     for country, cities_in_country in most_cities.iteritems():
+        # Get the index the the current country
         index_of_biggest_city = index_of_biggest_cities[country]
+
+        # With the index the biggest city and population of that city can be extracted
         biggest_city = _df_worldcities.loc[index_of_biggest_city]['city']
         population_of_city = _df_worldcities.loc[index_of_biggest_city]['population']
+        
         print(f"{country} {cities_in_country} {biggest_city} {population_of_city}")
 
 
