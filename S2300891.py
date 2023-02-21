@@ -551,7 +551,7 @@ def assignment_5(_df_worldcities):
 
         # Extract the biggest city and population using the index
         biggest_city = _df_worldcities.loc[index_of_biggest_city]['city_ascii']
-        population_of_city = f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}"
+        population_of_city = int(_df_worldcities.loc[index_of_biggest_city]['population'])
 
         # I allow myself to use append here. The 10 memory jumps shouldn't 
         # affect runtime to much
@@ -562,6 +562,10 @@ def assignment_5(_df_worldcities):
     df_most_cities = most_cities.to_frame()
     df_most_cities['biggest_city'] = biggest_cities
     df_most_cities['population_of_city'] = population_of_cities
+
+    # This could be dome much better. I couldn't figure out how to rename th
+    # first column in any other way...
+    df_most_cities.columns = ['number_of_cities', 'biggest_city', 'population_of_city']
 
     print('')
     print(' The 10 countries with the highest number of cities: ')
@@ -589,6 +593,53 @@ def assignment_5(_df_worldcities):
                 str(cities_in_country) + " "*padding_cities_in+\
                 biggest_city + " "*padding_biggest_city+\
                 str(population_of_city))
+
+    # Create a subplot object to enable subplots (_ = fig and isn't used)
+    _, axes = plt.subplots(nrows=2,
+                           ncols=1,
+                           figsize=(8, 7),)
+    
+
+    # Same old fancy color trick as before
+    colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(10)]    
+
+    # Plot the results
+    df_most_cities.plot(ax=axes[0],     # Country ad number of cities on top
+                   y='number_of_cities',
+                   kind='bar',
+                   color=colors,
+                   grid=True,
+                   legend=False)
+
+    df_most_cities.plot(ax=axes[1],     # Biggest city with population below
+                    x='biggest_city',
+                    y='population_of_city',
+                    kind='bar',
+                    color=colors,       # The same (random) colors on both
+                    grid=True,
+                    legend=False)
+
+    # Fix the label rotation
+    axes[0].tick_params('x', labelrotation=30, labelsize=8)
+    axes[0].tick_params('y', labelrotation=0, labelsize=8)
+    axes[1].tick_params('x', labelrotation=30, labelsize=8)
+    axes[1].tick_params('y', labelrotation=0, labelsize=8)
+
+    # y-axis labels
+    axes[0].set_ylabel('Number of Cities', fontsize=8)
+    axes[1].set_ylabel('Number of People', fontsize=8)
+
+    # Remove x-labels (could probably be done better)
+    axes[0].set_xlabel('')
+    axes[1].set_xlabel('')
+
+    # Set titles with fontsize
+    axes[0].set_title('The Countries with the Highest Number of Cities', fontsize=10)
+    axes[1].set_title('The Biggest City in each Country', fontsize=10)
+
+    # This one sets the plots higher up on screen and add space between them
+    plt.subplots_adjust(top=0.9, bottom=0.25, hspace=0.5)
+    plt.show()
 
 
 ##################### This is where the assignments are called ########################
