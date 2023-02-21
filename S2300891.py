@@ -164,7 +164,6 @@ def assignment_3_choice_1(_df_cia_factbook):
     print('     rate and high life expectancy:')
     print('')
     print('     Country:              Area:              Number of Births:        Life Expectancy:')
-    print('                           [km^2]             [per 1000 inhabitants]')
     print('-----------------------------------------------------------------------------------------')
 
     # Loop over all filtered rows (countries)
@@ -237,7 +236,6 @@ def assignment_3_choice_3(_df_cia_factbook):
     population_growth_rate = (  + _df_cia_factbook['birth_rate']\
                                 - _df_cia_factbook['death_rate']\
                                 + _df_cia_factbook['net_migration_rate'])\
-                                * 0.1 # This is times 100 for percent divided på 1000 
 
     # Add it to the main dataframe
     _df_cia_factbook['population_growth_rate'] = population_growth_rate
@@ -258,7 +256,6 @@ def assignment_3_choice_3(_df_cia_factbook):
     print('')
     print(' The Countries with Highest Percentage Population Decline and Growth: ')
     print('   Country:                   Births rate:    Death rate:     Net migration:  Population change')
-    print('                             [/1000 people]  [/1000 people]   [/1000 people]   [percent]')
     print('---------------------------------------------------------------------------------------------------')
 
     # The print is a bit messy. First strings are created (I choose one decimal place).
@@ -342,7 +339,6 @@ def assignment_3_print_menu():
     print('     Press 2 to view the countries with lowest and highest internet user')
     print('     density')
     print('     Press 3 to view the countries with highest and lowest population')
-    print('     growth (or decline) per 1000 inhabitants')
     print('')
     print('     Press 4 to exit program')
     print('     press 0 to view menu again')
@@ -544,17 +540,31 @@ def assignment_5(_df_worldcities):
     # Pick the 10 countries with the most cities
     most_cities = number_of_cities[:10]
 
+    print('')
+    print(' The 10 countries with the highest number of cities: ')
+    print('')
+    print('  Country:                 Number of cities:   Biggest city:     Number of people in biggest city:')
+    print('---------------------------------------------------------------------------------------------------')
+
     # Iterate over the 10 most city-full countries,
     # The country and number of cities are extracted right away
-    for country, cities_in_country in most_cities.iteritems():
+    for country, cities_in_country in most_cities.items():
         # Get the index the the current country
         index_of_biggest_city = index_of_biggest_cities[country]
 
         # With the index the biggest city and population of that city can be extracted
-        biggest_city = _df_worldcities.loc[index_of_biggest_city]['city']
-        population_of_city = _df_worldcities.loc[index_of_biggest_city]['population']
-        
-        print(f"{country} {cities_in_country} {biggest_city} {population_of_city}")
+        biggest_city = _df_worldcities.loc[index_of_biggest_city]['city_ascii']
+        population_of_city = f"{_df_worldcities.loc[index_of_biggest_city]['population']:.0f}"
+
+        padding_country = max(25 - len(country), 0)
+        padding_cities_in = max(20 - len(str(cities_in_country)), 0)
+        padding_biggest_city = max(18 - len(biggest_city), 0)
+
+        print(  "  " +\
+                country + " "*padding_country +\
+                str(cities_in_country) + " "*padding_cities_in+\
+                biggest_city + " "*padding_biggest_city+\
+                str(population_of_city))
 
 
 ##################### This is where the assignments are called ########################
