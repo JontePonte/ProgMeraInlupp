@@ -532,15 +532,20 @@ def assignment_4b(_df_worldpubind):
 def assignment_5(_df_worldcities):
     """ My solution to assignment 5. This function is called at the bottom of this file """
     df_groups = _df_worldcities.groupby('country')
+    
+    index_of_biggest_cities = df_groups['population'].idxmax()
+    
     number_of_cities = df_groups.size()
     number_of_cities = number_of_cities.sort_values(ascending=False)
 
     most_cities = number_of_cities[:10]
 
     for country, cities_in_country in most_cities.iteritems():
-        
-        print(f"{country} {cities_in_country}")
-    # number_of_cities = df_groups.sort_values(''
+        index_of_biggest_city = index_of_biggest_cities[country]
+        biggest_city = _df_worldcities.loc[index_of_biggest_city]['city']
+        population_of_city = _df_worldcities.loc[index_of_biggest_city]['population']
+        print(f"{country} {cities_in_country} {biggest_city} {population_of_city}")
+
 
 ##################### This is where the assignments are called ########################
 
