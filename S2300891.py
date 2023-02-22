@@ -276,7 +276,7 @@ def assignment_3_choice_3(_df_cia_factbook):
     # I needed extra padding here as well because of a little weird silly country
     # called "Saint Pierre and Miquelon"
     print('')
-    print(' The Countries with Highest Percentage Population Decline and Growth: ')
+    print(' The Countries with Highest Percentage Population Decline and Growth [per 1000 inhabitants]: ')
     print('   Country:                   Births rate:    Death rate:     Net migration:  Population change')
     print('---------------------------------------------------------------------------------------------------')
 
@@ -335,18 +335,22 @@ def assignment_3_choice_3(_df_cia_factbook):
     colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(10)]
 
     # The plot of the results
-    df_result.plot(x='country',
-                   y='population_growth_rate',
-                   kind='bar',
-                   color=colors,                    # Use the 10 random colors from above
-                   legend=False,                    # Legend is unnecessary here
-                   grid=True,                       # Add grid
-                   figsize=(10,6))                  # Make it bigger
+    axis = df_result.plot(x='country',
+                          y='population_growth_rate',
+                          kind='bar',
+                          color=colors,                    # Use the 10 random colors from above
+                          legend=False,                    # Legend is unnecessary here
+                          grid=True,                       # Add grid
+                          figsize=(10,6))                  # Make it bigger
+    
+    # Fix rotation and size of country names and numbers
+    axis.tick_params('x', labelrotation=60, labelsize=8)
+    axis.tick_params('y', labelrotation=0, labelsize=8)
 
+    # Titles and visual fixes to plot
     plt.subplots_adjust(bottom=0.25)                # Put window in middle of screen
-    plt.xticks(rotation=45)                         # Rotate the names on the x-axis
-    plt.title('Highest Population Decline and Highest Population Growth')
-    plt.xlabel('Country')
+    plt.title('Highest Population Decline and Highest Population Growth. (close window to view table)')
+    plt.xlabel(' ')
     plt.ylabel('Population Growth Rate in Percent')
     plt.show()
 
@@ -360,7 +364,7 @@ def assignment_3_print_menu():
     print('     rate and high life expectancy')
     print('     Press 2 to view the countries with lowest and highest internet user')
     print('     density')
-    print('     Press 3 to view the countries with highest and lowest population')
+    print('     Press 3 to view the countries with highest and lowest population growth')
     print('')
     print('     Press 4 to exit program')
     print('     press 0 to view menu again')
@@ -368,7 +372,11 @@ def assignment_3_print_menu():
 
 
 def assignment_3(_df_cia_factbook):
-    """ My solution to assignment 3. This function is called at the bottom of the file """
+    """ 
+    My solution to assignment 3. This function is called at the bottom of the file.
+    This function handles the menu and user input. Most of the code is is each choices
+    functions.
+    """
     # Call the print menu function
     assignment_3_print_menu()
 
@@ -383,14 +391,14 @@ def assignment_3(_df_cia_factbook):
         # Call the functions based on the user input
         if choice == '1':
             assignment_3_choice_1(_df_cia_factbook)
-            input('press enter')
+            input('press enter') # The input pauses until uses is ready
         elif choice == '2':
             assignment_3_choice_2(_df_cia_factbook)
             input('press enter')
         elif choice == '3':
             assignment_3_choice_3(_df_cia_factbook)
             input('press enter')
-        # choice 4 stops the program
+        # choice 4 stops the program by breaking the while loop
         elif choice == '4':
             print('Program stop')
             is_running = False
@@ -677,8 +685,8 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1() # assignment_1 
 The functions for the assignments are called here.
 You should probably only have 1 uncommented.
 """
-assignment_2(df_cia_factbook)
-# assignment_3(df_cia_factbook)
+# assignment_2(df_cia_factbook)
+assignment_3(df_cia_factbook)
 # assignment_4a(df_worldpubind)
 # assignment_4b(df_worldpubind)
 # assignment_5(df_worldcities)
