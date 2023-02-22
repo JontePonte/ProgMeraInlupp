@@ -433,18 +433,18 @@ def assignment_4a(_df_worldpubind):
     df_highest = df_sorted[-5:]
     df_highest = df_highest.sort_values('growth', ascending=False)
 
-    # Create a subplot object to enable subplots (_ = fig and isn't used)
+    # Create a subplot object to enable subplots ("_"=fig and isn't used)
     _, axes = plt.subplots(nrows=2,
                            ncols=1,
                            figsize=(8, 7),)
 
     # Same old fancy color trick as before
-    colors_l = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
-    colors_h = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]    
+    colors_l = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]
+    colors_h = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(5)]
 
     # Plot the results
     df_lowest.plot(ax=axes[0],          # Put lowest df on top
-                   x='Country Name',
+                   x='Country Name',    # Nothing we haven't seen before
                    y='growth',
                    kind='bar',
                    color=colors_l,
@@ -460,9 +460,9 @@ def assignment_4a(_df_worldpubind):
                     legend=False)
 
     # Make all the labels prettier
-    axes[0].tick_params('x', labelrotation=30, labelsize=8)
+    axes[0].tick_params('x', labelrotation=60, labelsize=8)
     axes[0].tick_params('y', labelrotation=0, labelsize=8)
-    axes[1].tick_params('x', labelrotation=30, labelsize=8)
+    axes[1].tick_params('x', labelrotation=60, labelsize=8)
     axes[1].tick_params('y', labelrotation=0, labelsize=8)
 
     axes[0].set_ylabel('[Percent]', fontsize=8)
@@ -472,7 +472,7 @@ def assignment_4a(_df_worldpubind):
     axes[0].set_xlabel('')
     axes[1].set_xlabel('')
 
-    # Set titles with fontsize
+    # Set titles with font size
     axes[0].set_title('Countries with highest population decline between 1960 and 2021', fontsize=10)
     axes[1].set_title('Countries with highest population growth between 1960 and 2021', fontsize=10)
 
@@ -497,59 +497,65 @@ def assignment_4b(_df_worldpubind):
     # Create a set of all countries in the data file to enable input check
     countries_set = set(_df_worldpubind['Country Name'].to_list())
 
-    # Check user input until a correct country is chosen
+    # Check if the user input is in the set of countries and redo the input 
+    # until it is
     while not country_choice in countries_set:
         print('        The country is not in this data set. Try again')
         country_choice = input('        Choose a new country:')
 
     # Single out the selected country. I use a dataframe with just the
-    # selected country
+    # selected country information
     test = _df_worldpubind['Country Name'] == country_choice
     df_country_choice = _df_worldpubind.loc[test]
 
+    # Create lists of the years and the selected country population
     years = df_country_choice.columns.tolist()[2:]
     population = df_country_choice.values.tolist()[0][2:]
 
-    # Create a new dataframe with just the relevant data
+    # Create a new dataframe bases on the lists
     df_populations = pd.DataFrame({'population': population, 'years': years})
 
     # Create a list to store population growth
-    # I do this before the calculation loop to avoid append and decrease runtime
+    # I do this before the calculation loop to avoid append (and decrease runtime)
     # Every year that doesn't have a value should be NaN so I set all to NaN from start
     growth_list = [np.nan]*df_populations.shape[0]
 
-    # Create iterable object for all the rows
+    # Create iterable object for the rows
     iterator = df_populations.iterrows()
     next(iterator) # Skip 1960
+
+    # Loop over the rows, calculate and store growth for each year from 1961
     for index, row in iterator:
         pop_the_year_before = df_populations.loc[index-1]['population']
         pop_this_year = row['population']
         growth_list[index] = (pop_this_year - pop_the_year_before) / pop_the_year_before * 100
 
+    # Add the new growth list to the country dataframe
     df_populations['growth'] = growth_list
 
     # Plot the data, the fig part of this is not needed (that's why the _)
-    _, ax = plt.subplots(figsize=(11, 7))
+    _, axis = plt.subplots(figsize=(11, 7))
 
     # Plot population first
     df_populations.plot(x='years',
                         y='population',
-                        ax=ax,
+                        ax=axis,
                         color='b')
-    ax.legend(loc='upper left') # Move population legend to match instruction
+    axis.legend(loc='upper left') # Move population legend to match instruction
 
     # Plot growth in the same plot
-    ax2 = ax.twinx()
+    axis2 = axis.twinx()
     df_populations.plot(x='years',
                         y='growth',
-                        ax=ax2,
+                        ax=axis2,
                         color='r')
-    ax2.legend(loc='upper right') # Move growth legend to match instruction
+    axis2.legend(loc='upper right') # Move growth legend to match instruction
 
-    ax.set_title(f'Population and population growth for {country_choice}')
-    ax.set_xlabel('Year')
-    ax.set_ylabel('Population [people] (blue)')
-    ax2.set_ylabel('Population growth [percent] (red)')
+    # Set titles and all the normal stuff
+    axis.set_title(f'Population and population growth for {country_choice}')
+    axis.set_xlabel('Year')
+    axis.set_ylabel('Population [people] (blue)')
+    axis2.set_ylabel('Population growth [percent] (red)')
 
     plt.show()
 
@@ -686,7 +692,7 @@ The functions for the assignments are called here.
 You should probably only have 1 uncommented.
 """
 # assignment_2(df_cia_factbook)
-assignment_3(df_cia_factbook)
+# assignment_3(df_cia_factbook)
 # assignment_4a(df_worldpubind)
-# assignment_4b(df_worldpubind)
+assignment_4b(df_worldpubind)
 # assignment_5(df_worldcities)
