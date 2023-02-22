@@ -687,11 +687,11 @@ df_cia_factbook, df_worldcities, df_worldpubind = assignment_1() # assignment_1 
 
 
 """
-The functions for the assignments are called here.
-You should probably only have 1 uncommented.
+The functions for the assignments are called here. Pick one to try is out.
+(you should probably only have 1 uncommented, it can get quite messy)
 """
-# assignment_2(df_cia_factbook)
-# assignment_3(df_cia_factbook)
-# assignment_4a(df_worldpubind)
-# assignment_4b(df_worldpubind)
-assignment_5(df_worldcities)
+assignment_2(df_cia_factbook)       # Starts at line 45
+# assignment_3(df_cia_factbook)       # Starts at line 164
+# assignment_4a(df_worldpubind)       # Starts at line 417
+# assignment_4b(df_worldpubind)       # Starts at line 484
+# assignment_5(df_worldcities)        # Starts at line 563
