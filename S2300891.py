@@ -148,8 +148,9 @@ def assignment_2(_df_cia_factbook):
 
             # Send the fancy dataframe and title to plotting function
             # fb_sorted.iloc[row_index]['density']:.1f extracts population density with one decimal
-            main_title = f"The population density of {user_input} is {fb_sorted.iloc[row_index]['density']:.1f} people per km^2"
-            
+            main_title = f"{user_input} is the {row_index} densest populated country.\
+ {fb_sorted.iloc[row_index]['density']:.1f} people per km^2"
+
             # Send to plot
             assignment_2_plot(df_country, main_title)
 
