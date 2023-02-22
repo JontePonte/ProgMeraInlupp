@@ -572,37 +572,38 @@ def assignment_5(_df_worldcities):
     # Get the index of each the biggest city of each country
     index_of_biggest_cities = df_groups['population'].idxmax()
 
-    # Create a Series object with the number of cities in each country
+    # Create a Series-object with the number of cities in each country
     number_of_cities = df_groups.size()
     number_of_cities = number_of_cities.sort_values(ascending=False) # And sort it
 
-    # Pick the 10 countries with the most cities
+    # Pick the 10 countries with the most cities (this is also a Series-object)
     most_cities = number_of_cities[:10]
 
     # Prepare two lists for the upcoming super-dataframe
     biggest_cities = []
     population_of_cities = []
 
-    # Store all needed data in the two lists using a loop
+    # Store all needed data in the two lists by using a loop
     for country, _ in most_cities.items():
         # Get the index the biggest city in the current country
         index_of_biggest_city = index_of_biggest_cities[country]
 
-        # Extract the biggest city and population using the index
+        # Extract the biggest city and its population using the index
         biggest_city = _df_worldcities.loc[index_of_biggest_city]['city_ascii']
         population_of_city = int(_df_worldcities.loc[index_of_biggest_city]['population'])
 
-        # I allow myself to use append here. The 10 memory jumps shouldn't 
-        # affect runtime to much
+        # I allow myself to use append here. The 10 memory jumps shouldn't
+        # affect memory use and runtime to much
         biggest_cities.append(biggest_city)
         population_of_cities.append(population_of_city)
 
-    # Create a dataframe from most_cities Series and add the new data
+    # Create the super-dataframe from most_cities Series and the city information
+    # This dataframe has all we need for the print and the plots
     df_most_cities = most_cities.to_frame()
     df_most_cities['biggest_city'] = biggest_cities
     df_most_cities['population_of_city'] = population_of_cities
 
-    # This could be dome much better. I couldn't figure out how to rename th
+    # This could be dome much better. I couldn't figure out how to rename the
     # first column in any other way...
     df_most_cities.columns = ['number_of_cities', 'biggest_city', 'population_of_city']
 
@@ -612,16 +613,14 @@ def assignment_5(_df_worldcities):
     print('  Country:                 Number of cities:   Biggest city:     Number of people in biggest city:')
     print('---------------------------------------------------------------------------------------------------')
 
-    # Iterate over the 10 most city-full countries,
-    # The country and number of cities are extracted right away
-    for country, row in df_most_cities.iterrows():
-        # Get the index the the current country
-
-        cities_in_country = row[0]
+    # Iterate over the super-dataframe and extract the relevant data
+    for country, row in df_most_cities.iterrows(): # "country" is the super-dataframe index
+        # The other info is extracted from the super-dataframe columns
+        cities_in_country = row['number_of_cities']
         biggest_city = row['biggest_city']
         population_of_city = row['population_of_city']
 
-        # Create padding to get the prints straight
+        # Create padding to get the prints straight, the numbers match the bigger print above
         padding_country = max(25 - len(country), 0)
         padding_cities_in = max(20 - len(str(cities_in_country)), 0)
         padding_biggest_city = max(18 - len(biggest_city), 0)
@@ -639,11 +638,11 @@ def assignment_5(_df_worldcities):
                            figsize=(8, 7),)
     
     # Same old fancy color trick as before
-    colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(10)]    
+    colors = ["#{:06x}".format(random.randint(0, 0xFFFFFF)) for _ in range(10)]
 
     # Plot the results
     df_most_cities.plot(ax=axes[0],     # Country ad number of cities on top
-                   y='number_of_cities',
+                   y='number_of_cities',# I only set "y" because "x" is index=country
                    kind='bar',
                    color=colors,
                    grid=True,
@@ -658,9 +657,9 @@ def assignment_5(_df_worldcities):
                     legend=False)
 
     # Fix the label rotation
-    axes[0].tick_params('x', labelrotation=30, labelsize=8)
+    axes[0].tick_params('x', labelrotation=60, labelsize=8)
     axes[0].tick_params('y', labelrotation=0, labelsize=8)
-    axes[1].tick_params('x', labelrotation=30, labelsize=8)
+    axes[1].tick_params('x', labelrotation=60, labelsize=8)
     axes[1].tick_params('y', labelrotation=0, labelsize=8)
 
     # y-axis labels
@@ -676,7 +675,7 @@ def assignment_5(_df_worldcities):
     axes[1].set_title('The Biggest City in each Country', fontsize=10)
 
     # This one sets the plots higher up on screen and add space between them
-    plt.subplots_adjust(top=0.9, bottom=0.25, hspace=0.5)
+    plt.subplots_adjust(top=0.9, bottom=0.25, hspace=0.6)
     plt.show()
 
 
@@ -694,5 +693,5 @@ You should probably only have 1 uncommented.
 # assignment_2(df_cia_factbook)
 # assignment_3(df_cia_factbook)
 # assignment_4a(df_worldpubind)
-assignment_4b(df_worldpubind)
-# assignment_5(df_worldcities)
+# assignment_4b(df_worldpubind)
+assignment_5(df_worldcities)
